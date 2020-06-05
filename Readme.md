@@ -13,7 +13,7 @@
 4.  修改/config/my.php
 
     ` //$config->requestType     = 'PATH_INFO';
-    
+
       $config->requestType     = 'GET';
     `
 5.	修改/module/commom/model.php，将oidc放置到匿名访问名单中，在model.php的isOpenMethod方法添加一行。
@@ -27,6 +27,7 @@
 
    ` 
     //die(js::locate(helper::createLink('user', 'login', "referer=$referer")));
+    
      die(js::locate(helper::createLink('oidc', 'index', "referer=$referer")));
   `
 
