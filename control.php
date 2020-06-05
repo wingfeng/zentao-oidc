@@ -56,11 +56,11 @@ class oidc extends control{
         $this->user->cleanLocked($dbuser->account);
         /* Authorize him and save to session. */
         $dbuser->admin    = strpos($this->app->company->admins, ",{$dbuser->account},") !== false;
-        $dbuser->rights   = $this->user->authorize($user->account);
-        $dbuser->groups   = $this->user->getGroups($user->account);
-        $dbuser->view     = $this->user->grantUserView($user->account, $user->rights['acls']);
+        $dbuser->rights   = $this->user->authorize($dbuser->account);
+        $dbuser->groups   = $this->user->getGroups($dbuser->account);
+        $dbuser->view     = $this->user->grantUserView($dbuser->account, $dbuser->rights['acls']);
         $dbuser->last     = date(DT_DATETIME1, $last);
-        $dbuser->lastTime = $user->last;
+        $dbuser->lastTime = $dbuser->last;
         $dbuser->modifyPassword = ($dbuser->visits == 0 and !empty($this->config->safe->modifyPasswordFirstLogin));
         if($dbuser->modifyPassword) $dbuser->modifyPasswordReason = 'modifyPasswordFirstLogin';
         if(!$dbuser->modifyPassword and !empty($this->config->safe->changeWeak))
